@@ -1,4 +1,5 @@
 const mongoose = require('../db/connection')
+const commentSchema = new mongoose.Schema({comment: String})
 
 const postSchema = new mongoose.Schema({
   username: {
@@ -21,7 +22,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [{ ref: "Comment", type: mongoose.Schema.Types.ObjectId }],
+  comments: [commentSchema],
 });
 
 const Post = mongoose.model('Post', postSchema)
