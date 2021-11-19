@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   // })
   // Cannot set headers after they are sent to the client
   // res.send('hello')
-  res.redirect('/bookmarks')
+  res.redirect('/post')
 });
 
 app.set("port", process.env.PORT || 8080);
