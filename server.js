@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/post", postController);
 
-app.listen(4000, () => {
-  console.log("server running on port 4000");
+app.set("port", process.env.PORT || 8080);
+
+app.listen(app.get("port"), () => {
+  console.log(`✅ PORT: ${app.get("port")} 🌟`);
 });
