@@ -9,7 +9,7 @@ let mongoURI = ''
 if (process.env.NODE_ENV === "production") {
   mongoURI = process.env.DB_URL;
 } else {
-  mongoURI = "mongodb://localhost/travelgram";
+  mongoURI = "mongodb+srv://travelgram:expressobeans@cluster0.qrdph.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 }
 // connect to the database, with the imported mongoose instance
 mongoose.connect(mongoURI, {useNewUrlParser: true})

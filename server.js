@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 // require("dotenv").config();
 const postController = require("./controllers/postController");
+const userController = require("./controllers/userController");
 
 // const PORT = process.env.PORT;
 
@@ -12,6 +13,8 @@ app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/posts", postController);
+app.use("/users", userController);
+
 
 // Default Route
 app.get("/", (req, res) => {
