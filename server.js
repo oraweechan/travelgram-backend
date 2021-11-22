@@ -3,15 +3,20 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 // require("dotenv").config();
-const postController = require("./controllers/postController");
 
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080
+
+const postController = require("./controllers/postController");
+const userController = require("./controllers/userController");
+
 
 app.use(cors());
 app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/posts", postController);
+app.use("/users", userController);
+
 
 // Default Route
 app.get("/", (req, res) => {
@@ -25,7 +30,7 @@ app.get("/", (req, res) => {
   res.redirect('/posts')
 });
 
-app.set("port", process.env.PORT || 8080);
+app.set('port', PORT)
 
 app.listen(app.get("port"), () => {
   console.log(`✅ PORT: ${app.get("port")} 🌟`);
