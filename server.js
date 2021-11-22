@@ -13,7 +13,7 @@ app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/posts", postController);
-app.use("/users", userController);
+app.use("/", userController);
 
 
 // Default Route
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
   // })
   // Cannot set headers after they are sent to the client
   // res.send('hello')
-  res.redirect('/posts')
+  res.redirect('/')
 });
 
 app.set("port", process.env.PORT || 8080);
