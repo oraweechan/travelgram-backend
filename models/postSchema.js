@@ -1,5 +1,5 @@
 const mongoose = require('../db/connection')
-const commentSchema = new mongoose.Schema({comment: String})
+const commentSchema = require('./commentSchema')
 
 const postSchema = new mongoose.Schema({
   username: {
