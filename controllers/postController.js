@@ -19,6 +19,13 @@ router.get("/", (req, res) => {
   });
 });
 
+//GET for one post
+router.get('/:likedId', (req,res) => {
+    Post.findById(req.params.likedId).then((post) => {
+        res.json({status: 200, post:post})
+    })
+})
+
 //UPDATE A POST
 router.put("/:postId", (req, res) => {
   Post.findOneAndUpdate({ _id: req.params.postId }, req.body, { new: true }).then(
@@ -44,6 +51,7 @@ router.post("/:postId", (req, res) => {
     },
     {
       $push: { comments: req.body },
+    //   $set: {likes : req.body}
     }
   )
     .then((post) => res.status(201).json({ status: 201, post: post }))
@@ -78,6 +86,19 @@ router.delete("/:postId/:commentId", (req, res) => {
   )
     .then((post) => res.status(205).json({ status: 201, post: post }))
     .catch((error) => console.log(error));
+});
+
+//ADD LIKE TO POST
+router.post("/likes/:postId", (req, res) => {
+  Post.updateOne(
+    {
+      _id: req.params.postId,
+    },
+    {
+      $set: { likes: req.body },
+    }
+  ).then((post) => res.status(201).json({ status: 201, post: post }));
+  // .catch((error) => console.log(error));
 });
 
 module.exports = router;
