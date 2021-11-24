@@ -19,6 +19,13 @@ router.get("/", (req, res) => {
   });
 });
 
+//GET for one post
+router.get('/:likedId', (req,res) => {
+    Post.findById(req.params.likedId).then((post) => {
+        res.json({status: 200, post:post})
+    })
+})
+
 //UPDATE A POST
 router.put("/:postId", (req, res) => {
   Post.findOneAndUpdate({ _id: req.params.postId }, req.body, { new: true }).then(
