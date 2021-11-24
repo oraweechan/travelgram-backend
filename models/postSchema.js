@@ -1,5 +1,6 @@
 const mongoose = require('../db/connection')
 const commentSchema = require('./commentSchema')
+const likeSchema = require('./likeSchema')
 
 const postSchema = new mongoose.Schema({
   username: {
@@ -22,6 +23,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date: Date,
+  likes: [likeSchema],
   comments: [commentSchema],
 });
 

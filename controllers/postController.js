@@ -44,6 +44,7 @@ router.post("/:postId", (req, res) => {
     },
     {
       $push: { comments: req.body },
+    //   $set: {likes : req.body}
     }
   )
     .then((post) => res.status(201).json({ status: 201, post: post }))
@@ -78,6 +79,19 @@ router.delete("/:postId/:commentId", (req, res) => {
   )
     .then((post) => res.status(205).json({ status: 201, post: post }))
     .catch((error) => console.log(error));
+});
+
+//ADD LIKE TO POST
+router.post("/likes/:postId", (req, res) => {
+  Post.updateOne(
+    {
+      _id: req.params.postId,
+    },
+    {
+      $set: { likes: req.body },
+    }
+  ).then((post) => res.status(201).json({ status: 201, post: post }));
+  // .catch((error) => console.log(error));
 });
 
 module.exports = router;
