@@ -13,7 +13,7 @@ app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/posts", postController);
-app.use("/", userController);
+app.use("/users", userController);
 
 
 // Default Route

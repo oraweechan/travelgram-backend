@@ -19,3 +19,4 @@ mongoose.connect(mongoURI, {useNewUrlParser: true})
      console.log("Connetion failed", error)
  })
 module.exports = mongoose;
+
