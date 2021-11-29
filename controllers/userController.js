@@ -12,11 +12,26 @@ router.get("/", (req, res) => {
   });
 });
 
+//get info for one user
 router.get("/:user", (req,res) => {
   User.findOne({username: req.params.user}).then((user) => {
     res.json({status:200, user:user})
   })
 })
+
+//create post for user
+router.post("/:user", (req, res) => {
+  User.updateOne(
+    {
+      username: req.params.user,
+    },
+    {
+      $push: { posts: req.body },
+      //   $set: {likes : req.body}
+    }
+  ).then((user) => res.status(201).json({ status: 201, user: user }));
+  // .catch((error) => console.log(error));
+});
 
 // Signup
 router.post("/signup", async (req, res) => {
