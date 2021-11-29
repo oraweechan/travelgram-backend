@@ -12,6 +12,27 @@ router.get("/", (req, res) => {
   });
 });
 
+//get info for one user
+router.get("/:user", (req,res) => {
+  User.findOne({username: req.params.user}).then((user) => {
+    res.json({status:200, user:user})
+  })
+})
+
+//create post for user
+router.post("/newpost/:user", (req, res) => {
+  User.updateOne(
+    {
+      username: req.params.user,
+    },
+    {
+      $push: { posts: req.body },
+      //   $set: {likes : req.body}
+    }
+  ).then((user) => res.status(201).json({ status: 201, user: user }));
+  // .catch((error) => console.log(error));
+});
+
 // Signup
 router.post("/signup", async (req, res) => {
   try {
@@ -56,11 +77,13 @@ router.post("/login", async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ msg: "Invalid Email or password." });
     const token = jwt.sign({ id: existingUser._id }, "secret");
-    res.json({
+    res.status(200).json({
       token,
       user: {
         id: existingUser._id,
         username: existingUser.username,
+        email: existingUser.email,
+        name: existingUser.name
       },
     });
   } catch (err) {
@@ -82,10 +105,11 @@ router.post("/tokenIsValid", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 router.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({
-    displayName: user.displayName,
+    username: user.username,
     id: user._id,
   });
 });
