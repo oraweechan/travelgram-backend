@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/postSchema");
-const Comment = require('../models/commentSchema')
-
+// const Comment = require('../models/commentSchema')
+const User = require('../models/userSchema')
 
 //ROUTES FOR POST MODEL
 //CREATE NEW POST

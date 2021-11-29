@@ -12,6 +12,12 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:user", (req,res) => {
+  User.findOne({username: req.params.user}).then((user) => {
+    res.json({status:200, user:user})
+  })
+})
+
 // Signup
 router.post("/signup", async (req, res) => {
   try {
