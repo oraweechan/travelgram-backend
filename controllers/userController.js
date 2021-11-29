@@ -20,7 +20,7 @@ router.get("/:user", (req,res) => {
 })
 
 //create post for user
-router.post("/:user", (req, res) => {
+router.post("/newpost/:user", (req, res) => {
   User.updateOne(
     {
       username: req.params.user,
@@ -77,7 +77,7 @@ router.post("/login", async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ msg: "Invalid Email or password." });
     const token = jwt.sign({ id: existingUser._id }, "secret");
-    res.json({
+    res.status(200).json({
       token,
       user: {
         // id: existingUser._id,
