@@ -6,11 +6,10 @@ const mongoose = require("mongoose");
 mongoose.Promise = Promise
 // set the uri for connecting to our local mongodb
 let mongoURI = ''
-
 if (process.env.NODE_ENV === "production") {
   mongoURI = process.env.DB_URL;
 } else {
-  mongoURI = "mongodb+srv://travelgram:expressobeans@cluster0.qrdph.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  mongoURI = "mongodb://localhost/travelgram";
 }
 // connect to the database, with the imported mongoose instance
 mongoose.connect(mongoURI, {useNewUrlParser: true})
@@ -19,5 +18,5 @@ mongoose.connect(mongoURI, {useNewUrlParser: true})
  }).catch(error => {
      console.log("Connection failed", error)
  })
+ 
 module.exports = mongoose;
-
