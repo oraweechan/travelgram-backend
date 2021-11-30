@@ -33,6 +33,20 @@ router.post("/newpost/:user", (req, res) => {
   // .catch((error) => console.log(error));
 });
 
+//delete post for user
+router.delete("/:user/:postId", (req, res) => {
+  User.updateOne(
+    {
+      username: req.params.user,
+    },
+    {
+      $pull: { posts: { _id: req.params.postId } },
+    }
+  )
+    .then((post) => res.status(205).json({ status: 201, post: post }))
+    .catch((error) => console.log(error));
+});
+
 // Signup
 router.post("/signup", async (req, res) => {
   try {
